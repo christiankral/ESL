@@ -1,7 +1,7 @@
 within ExtremumSeeking.Signals;
 model Pyramid_signal
   parameter Real probe_peak_amplitude = 1;
-  parameter Modelica.SIunits.Frequency probe_frequency = 1;
+  parameter Modelica.Units.SI.Frequency probe_frequency=1;
   Modelica.Blocks.Sources.Pulse Pulse_2(
     period=1/probe_frequency,
     offset=0,

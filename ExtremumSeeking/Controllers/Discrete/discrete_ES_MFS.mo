@@ -9,26 +9,28 @@ model discrete_ES_MFS
     annotation (Placement(transformation(extent={{140,-10},{160,10}}),  iconTransformation(extent={{100,-10},
             {120,10}})));
   import Modelica.Constants.pi;
-  parameter Modelica.SIunits.Frequency probe_frequency = 1 "Frequency of probe"
-  annotation (Dialog(group="Basic settings"));
+  parameter Modelica.Units.SI.Frequency probe_frequency=1 "Frequency of probe"
+    annotation (Dialog(group="Basic settings"));
   parameter Real control_gain = 1 "controller gain" annotation(Dialog(group="Basic settings"));
   parameter Integer probe_increment = 1 "Number of increments in probe amplitude"
   annotation (Dialog(group="Advanced settings"));
-  parameter Modelica.SIunits.Angle phase_shift(displayUnit="rad") = 0 "Phase shift of the ES"
-  annotation (Dialog(group="Advanced settings"));
-  parameter Modelica.SIunits.Angle delay_compensation(displayUnit="rad") = 0  "Phase shift for compensating measurement delays"
-  annotation (Dialog(group="Advanced settings"));
-  parameter Modelica.SIunits.Frequency f_cutoff_LPF = 0.1 * probe_frequency "Cut-off frequency of LPF"
-  annotation (Dialog(group="Advanced settings"));
-  parameter Modelica.SIunits.Frequency f_cutoff_HPF = 0.1 * probe_frequency "Cut-off frequency of HPF"
-  annotation (Dialog(group="Advanced settings"));
+  parameter Modelica.Units.SI.Angle phase_shift(displayUnit="rad") = 0
+    "Phase shift of the ES" annotation (Dialog(group="Advanced settings"));
+  parameter Modelica.Units.SI.Angle delay_compensation(displayUnit="rad") = 0
+    "Phase shift for compensating measurement delays"
+    annotation (Dialog(group="Advanced settings"));
+  parameter Modelica.Units.SI.Frequency f_cutoff_LPF=0.1*probe_frequency
+    "Cut-off frequency of LPF" annotation (Dialog(group="Advanced settings"));
+  parameter Modelica.Units.SI.Frequency f_cutoff_HPF=0.1*probe_frequency
+    "Cut-off frequency of HPF" annotation (Dialog(group="Advanced settings"));
   parameter Real control_increment = 0.1 "Size of increment for control output (smallest step size)"
   annotation (Dialog(group="Basic settings"));
   parameter Integer update_increment = 1  "Number of increments in each setpoint update" annotation(Dialog(group="Advanced settings"));
   parameter Integer max_update_increment = 10  "Max. number of increments in each setpoint update" annotation(Dialog(group="Advanced settings"));
 
-  parameter Modelica.SIunits.Period T_update = 10 "Length of time the mean is calculated for"
-  annotation (Dialog(group="Basic settings"));
+  parameter Modelica.Units.SI.Period T_update=10
+    "Length of time the mean is calculated for"
+    annotation (Dialog(group="Basic settings"));
   parameter Integer n_samples = 100 "Amount of sample periods for calculating the mean"
     annotation (Dialog(group="Basic settings"));
   parameter Real max_control = 10e30 "Maximal control signal (including probe signal)"

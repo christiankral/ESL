@@ -1,6 +1,6 @@
 within ExtremumSeeking.Examples;
 package OpenIPSL_Example
-  import SI = Modelica.SIunits;
+  import      Modelica.Units.SI;
   import C = Modelica.Constants;
 
 

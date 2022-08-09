@@ -7,22 +7,23 @@ model ES_ADV
     annotation (Placement(transformation(extent={{-44,-10},{-24,10}})));
   parameter Real probe_peak_amplitude = 0.1 "Peak amplitude of Probe"
   annotation (Dialog(group="Basic settings"));
-  parameter Modelica.SIunits.Frequency probe_frequency = 1 "Frequency of probe"
-  annotation (Dialog(group="Basic settings"));
-  parameter Modelica.SIunits.Angle phase_shift(displayUnit="rad") = 0 "Phase shift of the ES"
-  annotation (Dialog(group="Advanced settings"));
-  parameter Modelica.SIunits.Angle delay_compensation(displayUnit="rad") = 0  "Phase shift for compensating measurement delays"
-  annotation (Dialog(group="Advanced settings"));
+  parameter Modelica.Units.SI.Frequency probe_frequency=1 "Frequency of probe"
+    annotation (Dialog(group="Basic settings"));
+  parameter Modelica.Units.SI.Angle phase_shift(displayUnit="rad") = 0
+    "Phase shift of the ES" annotation (Dialog(group="Advanced settings"));
+  parameter Modelica.Units.SI.Angle delay_compensation(displayUnit="rad") = 0
+    "Phase shift for compensating measurement delays"
+    annotation (Dialog(group="Advanced settings"));
   parameter Integer order_LPF = 1 "Order of LPF"
   annotation (Dialog(group="Advanced settings"));
-  parameter Modelica.SIunits.Frequency f_cutoff_LPF = 0.1 * probe_frequency "Cut-off frequency of LPF"
-  annotation (Dialog(group="Advanced settings"));
+  parameter Modelica.Units.SI.Frequency f_cutoff_LPF=0.1*probe_frequency
+    "Cut-off frequency of LPF" annotation (Dialog(group="Advanced settings"));
   parameter Boolean BP_on = true "Activate BPF (when false only HPF)"
   annotation (Dialog(group="Advanced settings"));
   parameter Integer order_BPF = 1 "Order of BPF"
   annotation (Dialog(group="Advanced settings"));
-  parameter Modelica.SIunits.Frequency f_cutoff_BPF = probe_frequency "Cut-off frequency of BPF"
-  annotation (Dialog(group="Advanced settings"));
+  parameter Modelica.Units.SI.Frequency f_cutoff_BPF=probe_frequency
+    "Cut-off frequency of BPF" annotation (Dialog(group="Advanced settings"));
   parameter Real integrator_gain = 0.1 "Gain of integrator"
   annotation (Dialog(group="Basic settings"));
   parameter Boolean averaging = false "Activate averaging of gradient estimate"
@@ -35,9 +36,10 @@ model ES_ADV
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={122,0})));
-  Modelica.Blocks.Sources.Sine Probe(amplitude=probe_peak_amplitude, freqHz=
-        probe_frequency,
-    phase=phase_shift)   annotation (Placement(transformation(
+  Modelica.Blocks.Sources.Sine Probe(
+    amplitude=probe_peak_amplitude,
+    f=probe_frequency,
+    phase=phase_shift) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={90,-30})));
@@ -45,10 +47,11 @@ model ES_ADV
         extent={{10,10},{-10,-10}},
         rotation=180,
         origin={-60,0})));
-  Modelica.Blocks.Sources.Sine DemodulationSignal(             freqHz=
-        probe_frequency, amplitude=2/probe_peak_amplitude,
-    phase(displayUnit="rad") = phase_shift + delay_compensation)
-                         annotation (Placement(transformation(
+  Modelica.Blocks.Sources.Sine DemodulationSignal(
+    f=probe_frequency,
+    amplitude=2/probe_peak_amplitude,
+    phase(displayUnit="rad") = phase_shift + delay_compensation) annotation (
+      Placement(transformation(
         extent={{10,10},{-10,-10}},
         rotation=180,
         origin={-90,-30})));

@@ -9,18 +9,19 @@ model ES_ADV_2D
   annotation (Dialog(group="Basic settings"));
   parameter Real integrator_gain_2 = 0.1 "Gain of integrator"
   annotation (Dialog(group="Basic settings"));
-  parameter Modelica.SIunits.Frequency probe_frequency = 1 "Frequency of probe"
-  annotation (Dialog(group="Basic settings"));
-  parameter Modelica.SIunits.Angle delay_compensation(displayUnit="rad") = 0  "Phase shift for compensating measurement delays"
-  annotation (Dialog(group="Advanced settings"));
+  parameter Modelica.Units.SI.Frequency probe_frequency=1 "Frequency of probe"
+    annotation (Dialog(group="Basic settings"));
+  parameter Modelica.Units.SI.Angle delay_compensation(displayUnit="rad") = 0
+    "Phase shift for compensating measurement delays"
+    annotation (Dialog(group="Advanced settings"));
   parameter Integer order_LPF = 1 "Order of LPF"
   annotation (Dialog(group="Advanced settings"));
-  parameter Modelica.SIunits.Frequency f_cutoff_LPF = 0.1 * probe_frequency "Cut-off frequency of LPF"
-  annotation (Dialog(group="Advanced settings"));
+  parameter Modelica.Units.SI.Frequency f_cutoff_LPF=0.1*probe_frequency
+    "Cut-off frequency of LPF" annotation (Dialog(group="Advanced settings"));
   parameter Integer order_BPF = 1 "Order of HPF and LPF in the BPF"
   annotation (Dialog(group="Advanced settings"));
-  parameter Modelica.SIunits.Frequency f_cutoff_BPF = probe_frequency "Cut-off frequency of HPF"
-  annotation (Dialog(group="Advanced settings"));
+  parameter Modelica.Units.SI.Frequency f_cutoff_BPF=probe_frequency
+    "Cut-off frequency of HPF" annotation (Dialog(group="Advanced settings"));
   parameter Real max_control_1 = 10e30 "Maximal control signal (including probe signal)"
   annotation (Dialog(group="Advanced settings"));
   parameter Real min_control_1 = -10e30 "Minimum control signal (including probe signal)"

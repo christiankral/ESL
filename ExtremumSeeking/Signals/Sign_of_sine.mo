@@ -2,14 +2,14 @@ within ExtremumSeeking.Signals;
 model Sign_of_sine
   import Modelica.Constants.pi;
   parameter Real peak_amplitude = 1;
-  parameter Modelica.SIunits.Frequency frequency = 1;
-  parameter Modelica.SIunits.Angle phase_shift(displayUnit="rad") = 0;
+  parameter Modelica.Units.SI.Frequency frequency=1;
+  parameter Modelica.Units.SI.Angle phase_shift(displayUnit="rad") = 0;
   Modelica.Blocks.Interfaces.RealOutput y
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
 
 protected
   Real sine;
-  Modelica.SIunits.Time T_start "Start time of current period";
+  Modelica.Units.SI.Time T_start "Start time of current period";
   Integer count "Period count";
 
 equation

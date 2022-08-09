@@ -12,18 +12,19 @@ block discrete_ES_ADV "Discrete implementation of ES with first order filters"
 
   parameter Real probe_peak_amplitude = 0.1 "Peak amplitude of Probe"
   annotation (Dialog(group="Basic settings"));
-  parameter Modelica.SIunits.Frequency probe_frequency = 1 "Frequency of probe"
-  annotation (Dialog(group="Basic settings"));
+  parameter Modelica.Units.SI.Frequency probe_frequency=1 "Frequency of probe"
+    annotation (Dialog(group="Basic settings"));
   parameter Real integrator_gain = 0.1 "Gain of integrator"
   annotation (Dialog(group="Basic settings"));
-  parameter Modelica.SIunits.Angle phase_shift(displayUnit="rad") = 0 "Phase shift of the ES"
-  annotation (Dialog(group="Advanced settings"));
-  parameter Modelica.SIunits.Angle delay_compensation(displayUnit="rad") = 0  "Phase shift for compensating measurement delays"
-  annotation (Dialog(group="Advanced settings"));
-  parameter Modelica.SIunits.Frequency f_cutoff_BPF = probe_frequency "Cut-off frequency of BPF"
-  annotation (Dialog(group="Advanced settings"));
-  parameter Modelica.SIunits.Frequency f_cutoff_LPF = 0.1 * probe_frequency "Cut-off frequency of LPF"
-  annotation (Dialog(group="Advanced settings"));
+  parameter Modelica.Units.SI.Angle phase_shift(displayUnit="rad") = 0
+    "Phase shift of the ES" annotation (Dialog(group="Advanced settings"));
+  parameter Modelica.Units.SI.Angle delay_compensation(displayUnit="rad") = 0
+    "Phase shift for compensating measurement delays"
+    annotation (Dialog(group="Advanced settings"));
+  parameter Modelica.Units.SI.Frequency f_cutoff_BPF=probe_frequency
+    "Cut-off frequency of BPF" annotation (Dialog(group="Advanced settings"));
+  parameter Modelica.Units.SI.Frequency f_cutoff_LPF=0.1*probe_frequency
+    "Cut-off frequency of LPF" annotation (Dialog(group="Advanced settings"));
   parameter Real max_control = 10e30 "Maximal control signal (including probe signal)"
   annotation (Dialog(group="Advanced settings"));
   parameter Real min_control = -max_control "Minimum control signal (including probe signal)"
@@ -55,13 +56,17 @@ protected
     a={1,ld_2},
     samplePeriod=Ts)
     annotation (Placement(transformation(extent={{-28,-10},{-8,10}})));
-  Modelica.Blocks.Sources.Sine Demodulation_Sine(freqHz=probe_frequency, amplitude=2/probe_peak_amplitude,
-    phase= phase_shift + delay_compensation)
+  Modelica.Blocks.Sources.Sine Demodulation_Sine(
+    f=probe_frequency,
+    amplitude=2/probe_peak_amplitude,
+    phase=phase_shift + delay_compensation)
     annotation (Placement(transformation(extent={{-98,-46},{-78,-26}})));
   Modelica.Blocks.Math.Add Modulation
     annotation (Placement(transformation(extent={{80,-10},{100,10}})));
-  Modelica.Blocks.Sources.Sine Modulation_Sine(freqHz=probe_frequency, amplitude=probe_peak_amplitude,
-    phase= phase_shift)
+  Modelica.Blocks.Sources.Sine Modulation_Sine(
+    f=probe_frequency,
+    amplitude=probe_peak_amplitude,
+    phase=phase_shift)
     annotation (Placement(transformation(extent={{38,-46},{58,-26}})));
   Modelica.Blocks.Discrete.Sampler sampler(samplePeriod=Ts)
     annotation (Placement(transformation(extent={{112,-10},{132,10}})));
